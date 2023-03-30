@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-using namespace std;
+// using namespace std;
 
-int checkPoints(string *str)
+int checkPoints(std::string *str)
 {
   int i = 0;
   int count = 0;
@@ -17,14 +17,14 @@ int checkPoints(string *str)
   return count;
 }
 
-void setPoint(int *c, string *pointsArray)
+void setPoint(int *c, std::string *pointsArray)
 {
   (*pointsArray)[(*c)] = '0';
 }
 
 int main()
 {
-  ifstream fin;
+  std::ifstream fin;
   fin.open("./data.txt");
   if (fin.is_open())
   {
@@ -34,12 +34,12 @@ int main()
     {
       int pointsCount = 0;
 
-      string str = "";
-      string *pt = &str;
-      getline(fin, str);
+      std::string str = "";
+      std::string *pt = &str;
+      std::getline(fin, str);
       int c = 0;
       int bracketsStatus = 0;
-      string name = "";
+      std::string name = "";
       while (str[c] >= 'a' && str[c] <= 'z')
       {
         name = name + str[c];
@@ -57,31 +57,31 @@ int main()
       }
       else
       {
-        cout << str << endl;
+        std::cout << str << std::endl;
 
-        cout << "Error at column 0: expected 'circle', 'triangle'" << endl;
+        std::cout << "Error at column 0: expected 'circle', 'triangle'" << std::endl;
         exit(0);
       }
 
       if (bracketsStatus == 0)
       {
-        cout << str << endl;
+        std::cout << str << std::endl;
 
-        cout << "Error at column " << c << ": expected '('" << endl;
+        std::cout << "Error at column " << c << ": expected '('" << std::endl;
         exit(0);
       }
       pointsCount = checkPoints(pt);
 
-      string *pointsArray = new string[pointsCount + 1];
+      std::string *pointsArray = new std::string[pointsCount + 1];
       for (int i = 0; i < pointsCount + 1; i++)
       {
-        string item = "";
+        std::string item = "";
         do
         {
           if (str[c] >= 'a' && str[c] <= 'z')
           {
-            cout << str << endl;
-            cout << "Error at column " << c << ": expected '<double>'" << endl;
+            std::cout << str << std::endl;
+            std::cout << "Error at column " << c << ": expected '<double>'" << std::endl;
             exit(0);
           }
           if (!(str[c] == ' ' && str[c - 1] == ','))
@@ -98,9 +98,9 @@ int main()
       {
         if (str[c] != ')')
         {
-          cout << str << endl;
+          std::cout << str << std::endl;
 
-          cout << "Error at column " << c << ": expected ) " << endl;
+          std::cout << "Error at column " << c << ": expected ) " << std::endl;
           exit(0);
         }
       }
@@ -108,39 +108,39 @@ int main()
       {
         if (pointsArray[0].compare(pointsArray[pointsCount]) != 0)
         {
-          cout << str << endl;
-          cout << "Error at column " << c << " first and last points not same " << endl;
+          std::cout << str << std::endl;
+          std::cout << "Error at column " << c << " first and last points not same " << std::endl;
           exit(0);
         }
       }
-      cout << itemCount << " - ";
-      cout << name;
+      std::cout << itemCount << " - ";
+      std::cout << name;
       for (int i = 0; i < bracketsStatus; i++)
       {
-        cout << "(";
+        std::cout << "(";
       }
       for (int i = 0; i < pointsCount + 1; i++)
       {
         if (i == pointsCount - 1)
         {
-          cout << pointsArray[i] << ",";
+          std::cout << pointsArray[i] << ",";
         }
         else
         {
-          cout << pointsArray[i];
+          std::cout << pointsArray[i];
         }
       }
       for (int i = 0; i < bracketsStatus; i++)
       {
-        cout << ")";
+        std::cout << ")";
       }
-      cout << "\n";
+      std::cout << "\n";
       itemCount++;
     }
   }
   else
   {
-    cout << "Error: wrong path file" << endl;
+    std::cout << "Error: wrong path file" << std::endl;
   }
   fin.close();
 
