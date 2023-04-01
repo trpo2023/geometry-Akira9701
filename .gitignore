@@ -1,3 +1,5 @@
-*.exe
-.vscode/
-*.out
+*.a
+*.d
+*.o
+bin/geometry
+.vscode
