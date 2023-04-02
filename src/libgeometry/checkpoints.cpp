@@ -21,3 +21,4 @@ void setPoint(int *c, std::string *pointsArray)
 {
   (*pointsArray)[(*c)] = '0';
 }
+

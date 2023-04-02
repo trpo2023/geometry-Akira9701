@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <libgeometry/checkpoints.h>
+#include <libgeometry/per.h>
 
 // using namespace std;
 
@@ -121,6 +122,9 @@ int main()
       }
       std::cout << "\n";
       itemCount++;
+
+      per(pointsArray, pointsCount+1, name);
+      
     }
   }
   else
