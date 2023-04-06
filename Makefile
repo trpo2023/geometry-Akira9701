@@ -3,7 +3,7 @@ LIB_NAME = libgeometry
 
 CFLAGS = -Wall -Werror -I src
 DEPSFLAGS = -MMD
-CC = g++
+COMP = g++
 
 BIN_DIR = bin
 OBJ_DIR = obj
@@ -26,13 +26,13 @@ all: $(APP_PATH)
 -include $(DEPS)
 
 $(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
-	$(CC) $(CFLAGS) -o $@ $^ -lm
+	$(COMP) $(CFLAGS) -o $@ $^ 
 
 $(LIB_PATH): $(LIB_OBJECTS)
 	ar rcs $@ $^
 
 $(OBJ_DIR)/%.o: %.cpp
-	$(CC) $(CFLAGS) $(DEPSFLAGS) -c -o $@ $< -lm
+	$(COMP) $(CFLAGS) $(DEPSFLAGS) -c -o $@ $< 
 
 .Geom: clean
 clean:
