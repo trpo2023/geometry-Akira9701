@@ -104,7 +104,7 @@ int main()
             std::cout << "\n";
             itemCount++;
 
-            per(pointsArray, pointsCount + 1, name);
+            space(pointsArray, pointsCount + 1, name);
         }
     } else {
         std::cout << "Error: wrong path file" << std::endl;
