@@ -3,7 +3,6 @@
 #include <iostream>
 #include <string>
 
-int checkPoints(std::string *str);
+int checkPoints(std::string* str);
 
-
-void setPoint(int *c, std::string *pointsArray);
+void setPoint(int* c, std::string* pointsArray);
