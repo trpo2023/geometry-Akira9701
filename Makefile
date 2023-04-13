@@ -9,7 +9,7 @@ BIN_DIR = bin
 OBJ_DIR = obj
 SRC_DIR = src
 
-APP_PATH = $(BIN_DIR)/$(APP_NAME)
+APP_PATH = $(BIN_DIR)/a
 LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/$(LIB_NAME).a
 
 APP_SOURCES = $(wildcard $(SRC_DIR)/$(APP_NAME)/*.cpp)
@@ -32,7 +32,7 @@ $(LIB_PATH): $(LIB_OBJECTS)
 	ar rcs $@ $^
 
 $(OBJ_DIR)/%.o: %.cpp
-	$(COMP) $(CFLAGS) $(DEPSFLAGS) -c -o $@ $< 
+	$(COMP) $(CFLAGS)  -c -o $@ $< 
 
 .Geom: clean
 clean:
