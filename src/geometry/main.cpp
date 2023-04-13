@@ -14,7 +14,6 @@ int main()
         int itemCount = 1;
         while (!fin.eof()) {
             int pointsCount = 0;
-
             std::string str = "";
             std::string* pt = &str;
             std::getline(fin, str);
