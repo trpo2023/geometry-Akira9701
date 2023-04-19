@@ -1,17 +1,19 @@
 #include <fstream>
 #include <iostream>
 #include <libgeometry/checkpoints.h>
+#include <libgeometry/intersects.h>
 #include <libgeometry/per.h>
 #include <string>
-
-// using namespace std;
 
 int main()
 {
     std::ifstream fin;
+
     fin.open("data.txt");
-    if (fin.is_open()) {
+
+     if (fin.is_open()) {
         int itemCount = 1;
+        figureType figures[10];
         while (!fin.eof()) {
             int pointsCount = 0;
             std::string str = "";
@@ -78,26 +80,59 @@ int main()
                     exit(0);
                 }
             }
-            std::cout << itemCount << " - ";
-            std::cout << name;
-            for (int i = 0; i < bracketsStatus; i++) {
+            // std::cout << itemCount << " - ";
+            // std::cout << name;
+            // for (int i = 0; i < bracketsStatus; i++) {
+            //     std::cout << "(";
+            // }
+            // for (int i = 0; i < pointsCount + 1; i++) {
+            //     if (i == pointsCount - 1) {
+            //         std::cout << pointsArray[i] << ",";
+            //     } else {
+            //         std::cout << pointsArray[i];
+            //     }
+            // }
+            // for (int i = 0; i < bracketsStatus; i++) {
+            //     std::cout << ")";
+            // }
+            std::cout << "\n";
+            float* data = space(pointsArray, pointsCount + 1, name);
+            figures[itemCount - 1].name = name;
+            figures[itemCount - 1].pointsArray = pointsArray;
+            figures[itemCount - 1].pointsCount = pointsCount;
+            figures[itemCount - 1].perimetr = data[0];
+            figures[itemCount - 1].area = data[1];
+            figures[itemCount - 1].bracketsStatus = bracketsStatus;
+
+            itemCount++;
+        }
+
+        intersect(figures, itemCount - 1);
+
+        for (int j = 0; j < itemCount - 1; j++) {
+            std::cout << j + 1 << " - ";
+            std::cout << figures[j].name;
+            for (int i = 0; i < figures[j].bracketsStatus; i++) {
                 std::cout << "(";
             }
-            for (int i = 0; i < pointsCount + 1; i++) {
-                if (i == pointsCount - 1) {
-                    std::cout << pointsArray[i] << ",";
+            for (int i = 0; i < figures[j].pointsCount + 1; i++) {
+                if (i == figures[j].pointsCount - 1) {
+                    std::cout << figures[j].pointsArray[i] << ",";
                 } else {
-                    std::cout << pointsArray[i];
+                    std::cout << figures[j].pointsArray[i];
                 }
             }
-            for (int i = 0; i < bracketsStatus; i++) {
+            for (int i = 0; i < figures[j].bracketsStatus; i++) {
                 std::cout << ")";
             }
-            std::cout << "\n";
-            itemCount++;
-
-            space(pointsArray, pointsCount + 1, name);
+            std::cout << std::endl;
+            std::cout << "\tperimetr - " << figures[j].perimetr << std::endl;
+            std::cout << "\tarea - " << figures[j].area << std::endl;
+            std::cout << "\tintersects" << std::endl;
+            std::cout << figures[j].intersect << std::endl;
+            std::cout << std::endl;
         }
+
     } else {
         std::cout << "Error: wrong path file" << std::endl;
     }

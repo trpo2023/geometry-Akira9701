@@ -1,25 +1,22 @@
+#include "checkpoints.h"
+#include <fstream>
 #include <iostream>
 #include <string>
-#include <fstream>
-#include "checkpoints.h"
 
-int checkPoints(std::string *str)
+int checkPoints(std::string* str)
 {
-  int i = 0;
-  int count = 0;
-  while ((*str)[i] != ')') 
-  { 
-    if ((*str)[i] == ',')
-      count++;
-      
-    i++;
-  }
+    int i = 0;
+    int count = 0;
+    while ((*str)[i] != ')') {
+        if ((*str)[i] == ',')
+            count++;
 
-  return count;
+        i++;
+    }
+    return count;
 }
 
-void setPoint(int *c, std::string *pointsArray)
+void setPoint(int* c, std::string* pointsArray)
 {
-  (*pointsArray)[(*c)] = '0';
+    (*pointsArray)[(*c)] = '0';
 }
-
