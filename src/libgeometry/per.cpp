@@ -42,9 +42,6 @@ float* space(std::string* array, int n, std::string name)
             }
             points[2 * i] = strtof(p1.c_str(), nullptr);
             points[2 * i + 1] = strtof(p2.c_str(), nullptr);
-
-            // std::cout << "x - " << points[2 * i] << " y - " << points[2 * i + 1] << std::endl;
-            // std::cout << 2 * i << "," << 2 * i + 1 << std::endl;
         }
 
         float x1 = points[0];
@@ -62,25 +59,5 @@ float* space(std::string* array, int n, std::string name)
         cord[0] = p;
         cord[1] = s;
     }
-    // std::cout << "\t"
-    //           << "perimetr = " << cord[0] << std::endl;
-    // std::cout << "\t"
-    //           << "area = " << cord[1] << std::endl;
-    // std::cout << "/* message */" << std::endl;
     return cord;
 }
-
-// int intersect(std::string* array, int n, std::string name)
-// {
-//     float* cord = new float[2];
-
-//     if (name.compare("circle") == 0) {
-//         float p1 = strtof(array[0].c_str(), nullptr);
-//         float p2 = strtof(array[1].c_str(), nullptr);
-//         float s = (p2 - p1) * (p2 - p1) * 3.14;
-//         float p = 2 * 3.14 * (p2 - p1);
-//         cord[0] = p;
-//         cord[1] = s;
-//     }
-//     return 0;
-// }

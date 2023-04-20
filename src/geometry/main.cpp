@@ -11,7 +11,7 @@ int main()
 
     fin.open("data.txt");
 
-     if (fin.is_open()) {
+    if (fin.is_open()) {
         int itemCount = 1;
         figureType figures[10];
         while (!fin.eof()) {
@@ -80,21 +80,7 @@ int main()
                     exit(0);
                 }
             }
-            // std::cout << itemCount << " - ";
-            // std::cout << name;
-            // for (int i = 0; i < bracketsStatus; i++) {
-            //     std::cout << "(";
-            // }
-            // for (int i = 0; i < pointsCount + 1; i++) {
-            //     if (i == pointsCount - 1) {
-            //         std::cout << pointsArray[i] << ",";
-            //     } else {
-            //         std::cout << pointsArray[i];
-            //     }
-            // }
-            // for (int i = 0; i < bracketsStatus; i++) {
-            //     std::cout << ")";
-            // }
+
             std::cout << "\n";
             float* data = space(pointsArray, pointsCount + 1, name);
             figures[itemCount - 1].name = name;
@@ -130,6 +116,8 @@ int main()
             std::cout << "\tarea - " << figures[j].area << std::endl;
             std::cout << "\tintersects" << std::endl;
             std::cout << figures[j].intersect << std::endl;
+            std::cout << "\tpointsCount - " << figures[j].pointsCount << std::endl;
+            std::cout << "\tbracketsStatus - " << figures[j].bracketsStatus << std::endl;
             std::cout << std::endl;
         }
 
