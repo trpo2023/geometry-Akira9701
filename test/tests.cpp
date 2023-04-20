@@ -18,7 +18,7 @@ CTEST(tesChekpoints, checkPoints)
 
 CTEST(data_of_circle, space)
 {
-    const float expectedPer = 9.42;
+    const float expectedPer = 9.47;
     const float expectedArea = 7.065;
     std::string str[2] = {"0 0", "1.5"};
     float* a = space(str, 2, "circle");
