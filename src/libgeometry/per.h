@@ -4,5 +4,3 @@
 #include <string>
 
 float* space(std::string* array, int n, std::string name);
-
-int intersect(std::string* array, int n, std::string name);

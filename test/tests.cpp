@@ -38,7 +38,6 @@ CTEST(data_of_triange, space)
 CTEST(intersects_of_circles, intersect)
 {
     const float expectedCount = 6;
-
     figureType p1;
     p1.name = "circle";
     std::string str1[2] = {"00", "1.5"};
@@ -47,7 +46,6 @@ CTEST(intersects_of_circles, intersect)
     p1.area = 7.065;
     p1.intersect = "";
     p1.pointsCount = 1;
-
     figureType p2;
     p2.name = "circle";
     std::string str2[2] = {"3.14", "4.64"};
@@ -56,7 +54,6 @@ CTEST(intersects_of_circles, intersect)
     p2.area = 7.065;
     p2.intersect = "";
     p2.pointsCount = 1;
-
     figureType p3;
     p3.name = "circle";
     std::string str3[2] = {"2.14", "3.64"};
@@ -65,9 +62,7 @@ CTEST(intersects_of_circles, intersect)
     p3.area = 7.065;
     p3.intersect = "";
     p3.pointsCount = 1;
-
     figureType figures[3] = {p1, p2, p3};
-
     int a = intersect(figures, 3);
     ASSERT_EQUAL(expectedCount, a);
 }
