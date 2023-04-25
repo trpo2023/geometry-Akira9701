@@ -4,16 +4,38 @@
 #include <iostream>
 #include <libgeometry/checkpoints.h>
 #include <libgeometry/intersects.h>
+#include <libgeometry/parser.h>
 #include <libgeometry/per.h>
+
 #include <stdio.h>
 #include <string>
 
 CTEST(tesChekpoints, checkPoints)
 {
     const int expected = 1;
-    std::string str[1] = {"circle(0 0, 1.5)"};
+    std::string str = "circle(0 0, 1.5)";
     int a = checkPoints(str);
     ASSERT_EQUAL(expected, a);
+}
+
+CTEST(parser_test, parser)
+{
+    std::string str = "circle(0 0, 1.5)";
+    ParserData p1;
+    p1.name = "circle";
+    std::string x1 = "0 0";
+    std::string x2 = "1.5";
+    std::string array[2] = {x1, x2};
+    p1.pointsArray = array;
+    p1.bracketsStatus = 1;
+    p1.pointsCount = 1;
+    ParserData test = parser(str);
+    ASSERT_EQUAL(p1.bracketsStatus, test.bracketsStatus);
+    ASSERT_EQUAL(p1.pointsCount, test.pointsCount);
+    ASSERT_TRUE(p1.pointsArray[0] == test.pointsArray[0]);
+    ASSERT_TRUE(p1.pointsArray[1] == test.pointsArray[1]);
+    ASSERT_TRUE(p1.name == test.name);
+    // ASSERT_EQUAL(p1.pointsCount, test.pointsCount);
 }
 
 CTEST(data_of_circle, space)

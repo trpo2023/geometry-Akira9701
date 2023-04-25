@@ -32,7 +32,6 @@ all: $(APP_PATH)
 
 -include $(DEPS)
 
-# BUILD
 $(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
 	$(CC) $(CFLAGS) -o $@ $^ 
 
@@ -42,7 +41,6 @@ $(LIB_PATH): $(LIB_OBJECTS)
 $(OBJ_DIR)/%.o: %.cpp
 	$(CC) $(CFLAGS) $(DEPSFLAGS) -c -o $@ $< 
 
-# TEST
 test: $(LIB_PATH) $(TEST_PATH)
 	$(TEST_PATH)
 
@@ -55,10 +53,8 @@ $(OBJ_DIR)/test/main.o: test/main.cpp
 $(OBJ_DIR)/test/tests.o: test/tests.cpp
 	$(CC) $(TESTFLAGS) $(CFLAGS) $(DEPSFLAGS) -c -o $@ $<
 
-# RUN
 run: all
-	$(APP_PATH) $(BIN_DIR)/test.txt
+	$(APP_PATH) 
 
-# CLEAN
 clean:
 	$(RM) $(APP_PATH) $(TEST_PATH) $(OBJ_DIR)/*/*/*.[aod] $(OBJ_DIR)/test/*.[aod]

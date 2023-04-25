@@ -2,6 +2,7 @@
 #include <iostream>
 #include <libgeometry/checkpoints.h>
 #include <libgeometry/intersects.h>
+#include <libgeometry/parser.h>
 #include <libgeometry/per.h>
 #include <string>
 
@@ -15,80 +16,21 @@ int main()
         int itemCount = 1;
         figureType figures[10];
         while (!fin.eof()) {
-            int pointsCount = 0;
             std::string str = "";
             std::string* pt = &str;
             std::getline(fin, str);
-            int c = 0;
-            int bracketsStatus = 0;
-            std::string name = "";
-            while (str[c] >= 'a' && str[c] <= 'z') {
-                name = name + str[c];
-                c++;
-            }
-            if (name.compare("circle") == 0) {
-                str[c] == '(' ? bracketsStatus = 1 : bracketsStatus = 0;
-                c++;
-            } else if (name.compare("triangle") == 0) {
-                str[c] == '(' && str[c + 1] == '(' ? bracketsStatus = 2 : bracketsStatus = 0;
-                c += 2;
-            } else {
-                std::cout << str << std::endl;
-
-                std::cout << "Error at column 0: expected 'circle', 'triangle'" << std::endl;
-                exit(0);
-            }
-
-            if (bracketsStatus == 0) {
-                std::cout << str << std::endl;
-
-                std::cout << "Error at column " << c << ": expected '('" << std::endl;
-                exit(0);
-            }
-            pointsCount = checkPoints(pt);
-
-            std::string* pointsArray = new std::string[pointsCount + 1];
-            for (int i = 0; i < pointsCount + 1; i++) {
-                std::string item = "";
-                do {
-                    if (str[c] >= 'a' && str[c] <= 'z') {
-                        std::cout << str << std::endl;
-                        std::cout << "Error at column " << c << ": expected '<double>'" << std::endl;
-                        exit(0);
-                    }
-                    if (!(str[c] == ' ' && str[c - 1] == ',')) {
-                        item = item + str[c];
-                    }
-                    c++;
-                } while (str[c] != ',' && str[c] != ')');
-                c++;
-                pointsArray[i] = item;
-            }
-            c--;
-            for (int i = 0; i < bracketsStatus - 1; i++) {
-                if (str[c] != ')') {
-                    std::cout << str << std::endl;
-
-                    std::cout << "Error at column " << c << ": expected ) " << std::endl;
-                    exit(0);
-                }
-            }
-            if (name.compare("triangle") == 0) {
-                if (pointsArray[0].compare(pointsArray[pointsCount]) != 0) {
-                    std::cout << str << std::endl;
-                    std::cout << "Error at column " << c << " first and last points not same " << std::endl;
-                    exit(0);
-                }
-            }
+            ParserData textData = parser(str);
+            std::cout << str << " " << *pt << std::endl;
+            // std::cout << textData.name << "\n";
 
             std::cout << "\n";
-            float* data = space(pointsArray, pointsCount + 1, name);
-            figures[itemCount - 1].name = name;
-            figures[itemCount - 1].pointsArray = pointsArray;
-            figures[itemCount - 1].pointsCount = pointsCount;
+            float* data = space(textData.pointsArray, textData.pointsCount + 1, textData.name);
+            figures[itemCount - 1].name = textData.name;
+            figures[itemCount - 1].pointsArray = textData.pointsArray;
+            figures[itemCount - 1].pointsCount = textData.pointsCount;
             figures[itemCount - 1].perimetr = data[0];
             figures[itemCount - 1].area = data[1];
-            figures[itemCount - 1].bracketsStatus = bracketsStatus;
+            figures[itemCount - 1].bracketsStatus = textData.bracketsStatus;
 
             itemCount++;
         }
@@ -116,8 +58,8 @@ int main()
             std::cout << "\tarea - " << figures[j].area << std::endl;
             std::cout << "\tintersects" << std::endl;
             std::cout << figures[j].intersect << std::endl;
-            std::cout << "\tpointsCount - " << figures[j].pointsCount << std::endl;
-            std::cout << "\tbracketsStatus - " << figures[j].bracketsStatus << std::endl;
+            // std::cout << "\tpointsCount - " << figures[j].pointsCount << std::endl;
+            // std::cout << "\tbracketsStatus - " << figures[j].bracketsStatus << std::endl;
             std::cout << std::endl;
         }
 
